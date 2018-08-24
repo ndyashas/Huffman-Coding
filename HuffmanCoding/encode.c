@@ -11,7 +11,6 @@ void main(int argc, char **argv){
 	while(!feof(fp)){
 		HuffCodes[i] = (char*)malloc(sizeof(char)*15);
 		fgets(HuffCodes[i], 20, fp);
-		//printf("%d %s", i, HuffCodes[i]);
 		i++;
 	}
 
