@@ -1,3 +1,4 @@
-# Ignore all temporary files such as .txt , .enc
+# Ignore all temporary files such as .txt , .enc and all temporary files
 *.enc
 *.txt
+*.out
