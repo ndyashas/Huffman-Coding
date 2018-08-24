@@ -80,29 +80,18 @@ CharNode* minimumNode(CharNode **HuffTree, int *countChars){
 			j = i;
 			//printf("%f\n", min);
 		}
-	}	
-/*
-	printf("\nbefore removing %d\n", j);
-	for(i = 0; i< (*countChars); i++){
-		printf("%f ", (HuffTree[i])->weight);
 	}
-	printf("\n");
-*/
+	
 	HuffTree[j] = NULL;
 	for(i = j; i < (*countChars) -1 ; i++){
 		HuffTree[i] = HuffTree[i+1];
 	}
 
 	*countChars -= 1;
-	/*
-	for(i = 0; i< (*countChars); i++){
-		printf("%f ", (HuffTree[i])->weight);
-	}
-*/
 	return(ret);
 }
 
-// prints inOrder traversal of the tree
+
 void checkin(CharNode *root){
 	if(root->left != NULL){
 		checkin(root->left);
@@ -165,8 +154,6 @@ CharNode** makeHuffTree(float* probabilityTable){
 		add(HuffTree, resultant, &countChars);
 	}
 	
-	//printf("%d\n", count(HuffTree, countChars));
-	//printf("weight of root %f\n", (HuffTree[0])->weight);
 	return(HuffTree);
 }
 
@@ -183,15 +170,10 @@ void recurseUpdate(char** FinalTable, CharNode *root , char *curr){
 	}
 	if(root->left != NULL){
 		recurseUpdate(FinalTable, root->left, strcat(templeft, "0"));
-		//printf(" this is curr %s\n", curr);
-		//recurseUpdate(FinalTable, root->left, curr);
 	}
 
 	if(root->right != NULL){
 		recurseUpdate(FinalTable, root->right, strcat(tempright, "1"));
-		//curr[0] = '0';
-		//printf(" this is curr %s\n", curr);
-		//recurseUpdate(FinalTable, root->right, curr);
 	}
 }
 
@@ -227,20 +209,10 @@ void main(int argc, char **argv){
 	//int i = 0;
 
 	CharNode** HuffTree = makeHuffTree(probabilityTable);
-	//checkin(HuffTree[0]);
-	//printf("--------------------\n");
-	//checkpos(HuffTree[0]);
-
 	char ** FinalTable = GenHuffCode(HuffTree);
-	
 	FILE *fp = fopen("table.txt", "w");
 
 	for(i = 0; i < 128; i++){
 		fputs(strcat(FinalTable[i],"\n"), fp);
 	}
-	//fclose(fp);
-	/*
-	for(i = 0; i < 128; i++){
-		printf("%d  %c  %f  %s\n", i, i, probabilityTable[i], FinalTable[i]);
-	}*/
 }
